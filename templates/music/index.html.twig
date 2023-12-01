@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block menu %}
+
+        {% include 'menu.html.twig' %}
+
+    {% endblock %}
+
+    {{ form_start(searchForm, {'attr': {'class': 'search_music_form'}}) }}
+    {{ form_widget(searchForm) }}
+
+    {{ form_end(searchForm) }}
+
+
+
+    {% if not musicLink is empty %}
+
+        <span class='search--music--title'>{{ searchMusic }}</span>
+
+        <div class='div--iframe--wrap--wrap--wrap--play--button'>
+
+            <img class='div--iframe--wrap--wrap--wrap--play--button--img' src='{{ asset('assets/pictures/play-img.svg') }}' />
+
+
+            <div class='div--iframe--wrap--wrap'>
+                <div class='div--iframe--wrap'>
+                    <iframe class='iframe--music--player' src='{{ musicLink }}' allow='autoplay' style='opacity: 0;'></iframe>
+                </div>
+            </div>
+        </div>
+
+        {% if getPlaylists is defined %}
+
+            <form class='form--add--music--playlist' method='POST' name='form--add--music--playlist'>
+
+                <span class='form--add--music--playlist--span'>Add music to playlist:</span>
+
+                <select class='form--add--music--playlist--select' name='form--add--music--playlist--select'>
+                    
+                    {% for playlist in getPlaylists %}
+
+                        <option value='{{ playlist['id'] }}'>{{ ucWordsFunc(playlist['playlist_name']) }}</option>
+
+                    {% endfor %}
+                </select>
+
+                <input type='hidden' class='hidden--music--generate--title' id='hidden--music--generate--title' name='hidden--music--generate--title' value='{{ searchMusic }}'/>
+
+                <input type='hidden' class='hidden--music--generate--url' id='hidden--music--generate--url' name='hidden--music--generate--url' value='{{ musicLink }}'/>
+
+                <input type='hidden' class='hidden--music--generate--video--id' id='hidden--music--generate--video--id' name='hidden--music--generate--video--id' value='{{ videoId }}'/>
+
+                <input type='hidden' class='hidden--jwt' id='hidden--jwt' name='hidden--jwt' value='{{ app.session.get('user')[0]['jwt'] }}' />
+
+                <button type='submit' class='form--add--music--playlist--submit--button' name='form--add--music--playlist--submit--button'>Add</button>
+
+            </form>
+
+            <div class='error--div'>
+
+                <span class='error--div--span'></span>
+            </div>
+
+        {% endif %}
+        
+    {% endif %}
+
+    {% if app.session.get('error_music') != '' %}
+
+        <span class='error--span'>{{ app.session.get('error_music') }}</span>
+
+    {% endif %}
+
+{% endblock %}

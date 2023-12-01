@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block menu %}
+
+        {% include 'menu.html.twig' %}
+
+        {% if urlContainsPlaylist %}
+
+            <a class='a--button--new--playlist' href='{{ path('music_playlist_new') }}'>
+                <button class='button--new--playlist'>New Playlist</button>
+            </a>
+
+        {% endif %}
+
+    {% endblock %}
+
+    {{ form_start(getPlaylistsForm) }}
+
+        {{ form_widget(getPlaylistsForm.playlist_get_submit) }}
+
+        <input type='hidden' class='hidden--jwt' id='hidden--jwt' name='hidden--jwt' value='{{ app.session.get('user')[0]['jwt'] }}' />
+        
+    {{ form_end(getPlaylistsForm) }}
+
+
+
+    {% if getPlaylists is defined %}
+
+        <ul class='list--playlists--user--ul'>
+
+            {% for eachPlaylist in getPlaylists %}
+
+                <li class='list--playlists--user--ul--li' data-playlist_id='{{ eachPlaylist.id }}' data-playlist_name='{{ eachPlaylist.playlist_name }}'>
+                    <a class='list--playlists--user--ul--li--a' href='/music/playlist/{{ eachPlaylist.id }}'>
+                        <span class='list--playlists--user--ul--li--span--wrap'>
+                            <span class='list--playlists--user--ul--li--span'>{{ ucWordsFunc(eachPlaylist.playlist_name) }}</span>
+                        </span>
+                    </a>
+                    
+                    <a href='/music/playlist/edit/{{ eachPlaylist.id }}'>
+                        <div class='list--playlists--user--ul--li--div--img--edit'>
+                            <img class='list--playlists--user--ul--li--div--img--edit--img' src='{{ asset('assets/pictures/edit-img.svg') }}' />
+                        </div>
+                    </a>
+
+                    <div class='list--playlists--user--ul--li--div--img--delete'>
+                        <img class='list--playlists--user--ul--li--div--img--edit--img' src='{{ asset('assets/pictures/cross-img.svg') }}' />
+                    </div>
+                </li>
+                
+
+            {% endfor %}
+
+
+            {% if app.session.get('success') != '' %}
+
+                <div class='error--div error--div--edit active'>
+                    <span class='error--div--span'>New playlist created</span>
+                    <div class='confirm--box--yes--no'>
+                        <span class='yes--confirm'>Yes</span>
+                        <span class='no--confirm'>No</span>
+                    </div>
+                </div>
+
+            {% else %}
+
+                <div class='error--div error--div--edit'>
+                    <span class='error--div--span'></span>
+                    <div class='confirm--box--yes--no'>
+                        <span class='yes--confirm'>Yes</span>
+                        <span class='no--confirm'>No</span>
+                    </div>
+                </div>
+
+            {% endif %}
+
+        </ul>
+
+    {% endif %}
+
+{% endblock %}

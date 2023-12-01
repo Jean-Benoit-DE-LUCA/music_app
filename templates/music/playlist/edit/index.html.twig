@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block menu %}
+
+        {% include 'menu.html.twig' %}
+
+    {% endblock %}
+
+    {% if app.session.get('error_edit_playlist') != '' %}
+
+        <div class='error--div error--div--edit active_error'>
+            <span class='error--div--span'>{{ app.session.get('error_edit_playlist') }}</span>
+            <div class='confirm--box--yes--no'>
+                <span class='yes--confirm'>Yes</span>
+                <span class='no--confirm'>No</span>
+            </div>
+        </div>
+
+    {% elseif app.session.get('success') %}
+
+        <div class='error--div error--div--edit active'>
+            <span class='error--div--span'>{{ app.session.get('success') }}</span>
+            <div class='confirm--box--yes--no'>
+                <span class='yes--confirm'>Yes</span>
+                <span class='no--confirm'>No</span>
+            </div>
+        </div>
+
+    {% else %}
+
+        <div class='error--div error--div--edit'>
+            <span class='error--div--span'></span>
+            <div class='confirm--box--yes--no'>
+                <span class='yes--confirm'>Yes</span>
+                <span class='no--confirm'>No</span>
+            </div>
+        </div>
+
+    {% endif %}
+
+    <article class='old--new--playlist--container'>
+
+        <input type='hidden' name='hidden--name--playlist' class='hidden--name--playlist' id='hidden--name--playlist' value='{{ getPlaylist.playlist_name }}' />
+        <input type='hidden' name='hidden--id--playlist' class='hidden--id--playlist' id='hidden--id--playlist' value='{{ getPlaylist.id }}' />
+        <input type='hidden' class='hidden--jwt' id='hidden--jwt' name='hidden--jwt' value='{{ app.session.get('user')[0]['jwt'] }}' />
+
+        <header>
+            <h3 class='heading--playlist--order'>Current playlist order:</h3>
+        </header>
+        <section id='old--playlist--order' class='old--playlist--order'>
+
+            {% for song in getSongs %}
+                
+                <div class='block--div--song' id='block--div--song--{{ song.id }}' draggable='true'>
+                    <span class='block--div--song--span'>{{ song.music_name }}</span>
+                    <img class='block--div--song--cross' src='{{ asset('assets/pictures/cross-img.svg') }}' />
+                    <input type='hidden' class='hidden--song--id' name='hidden--song--id[]' id='hidden--song--id' value='{{ song.id }}' />
+                </div>
+
+            {% endfor %}
+
+        </section>
+        
+        <header id='header--new--playlist--order'>
+            <h3 class='heading--playlist--order' id='new--playlist--order--heading'>New playlist order:</h3>
+        </header>
+
+        <form method='POST'>
+
+            <input type='hidden' class='hidden--total--song' name='hidden--total--song' id='hidden--total--song' value='{{ countSongs }}' />
+            
+            <section id='new--playlist--order' class='new--playlist--order'>
+
+
+
+
+
+            </section>
+
+            <button class='submit--new--order--playlist' name='submit--new--order--playlist' id='submit--new--order--playlist'>Modify playlist order</button>
+        </form>
+    </article>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% block header %}
+
+    <div class='container'>
+
+        <header class='header'>
+            <a href='/music'>
+                <h1 class='header--h1'>Music</h1>
+            </a>
+
+            {% if not app.session.get('user') is empty %}
+
+                <span class='header--user'>Welcome {{ app.session.get('user')[0]['user_firstname'] }}!</span>
+
+            {% endif %}
+
+
+            {% if pathInfoBackAnchor() %}
+                <a class='back--anchor' href={{ app.request.headers.get('referer') }}>
+                    <img class='back--anchor--left--arrow' src={{ asset('assets/pictures/left-arrow.svg') }} />
+                </a>
+            {% endif %}
+            
+        </header>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block menu %}
+
+        {% include 'menu.html.twig' %}
+
+    {% endblock %}
+
+    <div class='registration--element'>
+
+        <h2 class='registration--element--title'>Register</h2>
+
+        {{ form_start(userForm, { 'attr': {'class': 'user_form'} }) }}
+
+            <div class='form_register_div'>
+                {{ form_label(userForm.user_name) }}
+                {{ form_widget(userForm.user_name) }}
+            </div>
+
+            <div class='form_register_div'>
+                {{ form_label(userForm.user_firstname) }}
+                {{ form_widget(userForm.user_firstname) }}
+            </div>
+
+            <div class='form_register_div'>
+                {{ form_label(userForm.user_mail) }}
+                {{ form_widget(userForm.user_mail) }}
+            </div>
+
+            <div class='form_register_div'>
+                {{ form_label(userForm.user_birthdate) }}
+                {{ form_widget(userForm.user_birthdate) }}
+            </div>
+
+            <div class='form_register_div'>
+                {{ form_label(userForm.user_password) }}
+                {{ form_widget(userForm.user_password) }}
+            </div>
+
+            <div class='form_register_div'>
+                {{ form_label(userForm.register_submit) }}
+                {{ form_widget(userForm.register_submit) }}
+            </div>
+
+        {{ form_end(userForm) }}
+    </div>
+
+    {% if app.session.get('error_registration') != '' %}
+
+        <span class='error--span'>{{ app.session.get('error_registration') }}</span>
+
+    {% endif %}
+
+{% endblock %}

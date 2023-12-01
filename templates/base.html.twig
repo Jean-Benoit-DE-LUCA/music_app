@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Music App By Jb</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="{{ asset('assets/styles/style.css') }}" />
+
+    </head>
+
+    <body>
+        
+        {% block header %}
+            {% include 'header.html.twig' %}
+        {% endblock %}
+
+        {% block body %}
+
+            
+
+            
+
+        {% endblock %}
+
+        {% block footer %}
+            {% include 'footer.html.twig' %}
+        {% endblock %}
+
+        {% block javascripts %}
+
+            <script src='{{ asset('assets/js_ts/edit_playlist.js') }}'></script>
+            <script src='{{ asset('assets/js_ts/delete_playlist.js') }}'></script>
+            <script src='{{ asset('assets/js_ts/play_music_playlist.js') }}'></script>
+            <script src='{{ asset('assets/js_ts/add_music_playlist.js') }}'></script>
+            <script src='{{ asset('assets/js_ts/search_music.js') }}'></script>
+            <script src='{{ asset('assets/js_ts/menu.js') }}'></script>
+
+        {% endblock %}
+    </body>
+    
+</html>

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block menu %}
+
+        {% include 'menu.html.twig' %}
+
+    {% endblock %}
+
+    <div class='registration--element'>
+
+        <h2 class='registration--element--title'>Sign in</h2>
+
+        {{ form_start(signinForm, { 'attr': {'class': 'user_form'} }) }}
+
+            <div class='form_register_div'>
+                {{ form_label(signinForm.user_mail) }}
+                {{ form_widget(signinForm.user_mail) }}
+            </div>
+
+            <div class='form_register_div'>
+                {{ form_label(signinForm.user_password) }}
+                {{ form_widget(signinForm.user_password) }}
+            </div>
+
+            <div class='form_register_div'>
+                {{ form_label(signinForm.signin_submit) }}
+                {{ form_widget(signinForm.signin_submit) }}
+            </div>
+
+        {{ form_end(signinForm) }}
+    </div>
+
+    {% if app.session.get('error') != '' %}
+
+        <span class='error--span'>{{ app.session.get('error') }}</span>
+
+    {% endif %}
+
+{% endblock %}

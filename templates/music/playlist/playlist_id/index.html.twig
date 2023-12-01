@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block menu %}
+
+        {% include 'menu.html.twig' %}
+
+    {% endblock %}
+
+    <div class='player--init--loader'>
+    
+        <span class='player--init--loader--span'>Music player initialization in progress</span>
+    
+    </div>
+
+    <h2 class='playlist--name--title'>Playlist: {{ ucWordsFunc(playlist_name) }}</h2>
+
+    <div class='div--iframe--song--playlist'>
+        {# <iframe class='iframe--song--playlist' src='' allow='autoplay' style="opacity: 0; border: 0; height: 0"></iframe> #}
+        <div id='playerYt'></div>
+    </div>
+
+    <ul class='playlist--list--song--ul'>
+
+        {% for song in getSongs %}
+
+            <li class='playlist--list--song--li'>
+                <span class='playlist--list--song--li--span'>{{ song.music_name }}</span>
+                <img class='playlist--list--song--img--play' src='{{ asset('assets/pictures/play-img.svg') }}' />
+                <input type='hidden' class='input--music--link--hidden' name='input--music--link--hidden' value='{{ song.music_link }}' />
+                <input type='hidden' class='input--music--video--id--hidden' name='input--music--music--video--id--hidden' value='{{ song.music_video_id }}' />
+            </li>
+
+        {% endfor %}
+
+    </ul>
+
+{% endblock %}

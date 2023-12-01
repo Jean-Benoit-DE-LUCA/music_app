@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block menu %}
+
+        {% include 'menu.html.twig' %}
+
+    {% endblock %}
+
+    {{ form_start(playlistNewForm, {'attr': {'class': 'playlist--new--form'} }) }}
+
+
+
+
+    {{ form_end(playlistNewForm) }}
+
+    {% if app.session.get('error_new') != '' %}
+
+        <span class='error--span error--span--new active'>{{ app.session.get('error_new') }}</span>
+
+    {% else %}
+
+        <span class='error--span error--span--new'></span>
+
+    {% endif %}
+
+{% endblock %}

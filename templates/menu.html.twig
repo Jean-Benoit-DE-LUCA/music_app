@@ -1,0 +1,44 @@
+{% block menu %}
+
+    <div class='div--main'>
+        
+        <div class='menu--button--div'>
+
+            <span class='menu--button--div--span'></span>
+            <span class='menu--button--div--span'></span>
+            <span class='menu--button--div--span'></span>
+
+        </div>
+
+        <ul class='menu--ul'>
+
+            <a class='menu--ul--a' href='{{ path('music') }}'>
+                <li class='menu--ul--li'>Home music</li>
+            </a>
+
+            <a class='menu--ul--a' href='{{ path('music_playlist') }}'>
+                <li class='menu--ul--li'>My playlists</li>
+            </a>
+
+            <a class='menu--ul--a' href='{{ path('sign_in') }}'>
+                <li class='menu--ul--li'>Sign in</li>
+            </a>
+
+            <a class='menu--ul--a' href='{{ path('registration') }}'>
+                <li class='menu--ul--li'>Register</li>
+            </a>
+
+            {% if not app.session.get('user') is empty %}
+
+                <a class='menu--ul--a' href='{{ path('logout') }}'>
+                    <li class='menu--ul--li'>Logout</li>
+                </a>
+
+            {% endif %}
+        </ul>
+            
+    <div class='wrap--blur--div'>
+
+    
+
+{% endblock %}
