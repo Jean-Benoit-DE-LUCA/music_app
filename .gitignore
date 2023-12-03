@@ -21,7 +21,6 @@
 
 ### miscellaneous ###
 
-/public/assets/pictures/*
 /ConfigFile.php
 /.env
 /.env.test
