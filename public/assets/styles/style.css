@@ -597,6 +597,12 @@ body {
     display: flex;
     align-items: center;
     overflow-y: scroll;
+    scrollbar-width: 0;
+}
+
+.playlist--list--song--li--span::-webkit-scrollbar {
+
+    display: none;
 }
 
 .div--main.active .menu--ul {

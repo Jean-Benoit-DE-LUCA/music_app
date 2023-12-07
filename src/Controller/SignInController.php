@@ -59,6 +59,8 @@ class SignInController extends AbstractController
 
                             $session->set('user', $getUser);
 
+                            setcookie("timeLogout", time() + 1800);
+
                             return $this->redirectToRoute('music');
                         }
                     }
