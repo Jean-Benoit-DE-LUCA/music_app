@@ -222,7 +222,6 @@ class MusicController extends AbstractController
     #[Route('/music/playlist',name: 'music_playlist')]
     public function indexPlaylist(Session $session) 
     {
-
         if (empty($session->get('user'))) {
 
             $session->set('error_music', 'You must be logged to access this area.');

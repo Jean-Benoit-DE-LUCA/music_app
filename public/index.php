@@ -1,11 +1,11 @@
 <?php
 
 use App\Kernel;
+use App\Functions\ConfigFunctions;
 
 require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 
-include_once '../ConfigFile.php';
-$configObj = new ConfigFile();
+$configObj = new ConfigFunctions();
 
 if (!$configObj->checkUrl()) {
     header('Location: /music');
