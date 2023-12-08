@@ -7,6 +7,8 @@ require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 
 $configObj = new ConfigFunctions();
 
+$configObj->checkLogout();
+
 if (!$configObj->checkUrl()) {
     header('Location: /music');
     die();

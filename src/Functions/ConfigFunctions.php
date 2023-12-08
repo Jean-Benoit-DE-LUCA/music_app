@@ -88,4 +88,17 @@ class ConfigFunctions {
 
         return $flag;
     }
+
+    public function checkLogout() {
+
+        if (isset($_COOKIE['timeLogout'])) {
+
+            if ($_COOKIE['timeLogout'] - time() <= 0) {
+        
+                setcookie('timeLogout', '', time()  - 3600);
+                header('Location: /logout');
+                die();
+            }
+        }
+    }
 }

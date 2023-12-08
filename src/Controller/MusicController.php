@@ -270,10 +270,10 @@ class MusicController extends AbstractController
 
         if (empty($session->get('user'))) {
 
-            $session->set('error', 'You must be logged to access this area.');
+            $session->set('error_music', 'You must be logged to access this area.');
             $session->set('timeError', time());
 
-            return $this->redirectToRoute('sign_in');
+            return $this->redirectToRoute('music');
         }
         
 
@@ -351,7 +351,15 @@ class MusicController extends AbstractController
     //
 
     #[Route('/music/playlist/{playlist_id}', name: 'music_playlist_playlist_id')]
-    public function playlistId(int $playlist_id) {
+    public function playlistId(int $playlist_id, Session $session) {
+
+        if (empty($session->get('user'))) {
+
+            $session->set('error_music', 'You must be logged to access this area.');
+            $session->set('timeError', time());
+
+            return $this->redirectToRoute('music');
+        }
 
         $getSongs = $this->musicRepository->findAllSongsByPlaylistId($playlist_id);
         $playlist = $this->playlistRepository->findPlaylist($playlist_id);
