@@ -84,7 +84,7 @@ class MusicController extends AbstractController
 
             $filteredSearchName = str_replace(' ', '%20', $_POST['search_music_form']['search_music']);
 
-            /*include_once '../ConfigFile.php';
+            include_once '../ConfigFile.php';
 
             $curl = curl_init();
 
@@ -99,11 +99,11 @@ class MusicController extends AbstractController
 
             $generateUrl = 'https://www.youtube.com/embed/' . $json->items[0]->id->videoId . '?enablejsapi=1';
             $generateTitle = $json->items[0]->snippet->title;
-            $generateVideoId = $json->items[0]->id->videoId;*/
+            $generateVideoId = $json->items[0]->id->videoId;
 
-            $generateUrl = 'https://www.youtube.com/embed/ujNeHIo7oTE?enablejsapi=1';
+            /*$generateUrl = 'https://www.youtube.com/embed/ujNeHIo7oTE?enablejsapi=1';
             $generateTitle = 'u2 - TEST';
-            $generateVideoId = 'ujNeHIo7oTE';
+            $generateVideoId = 'ujNeHIo7oTE';*/
 
             if (isset($session->get('user')[0]['id'])) {
 
